@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Header from "../components/Header"
-import { GetStaticProps, NextPage } from 'next'
+import { GetStaticProps } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 type CountryProps= {
@@ -16,7 +16,6 @@ type CountryProps= {
   }[]
 
 export default function Home({ countries }:{countries: CountryProps}) {
-
   return (
     <>
       <Head>
@@ -25,7 +24,7 @@ export default function Home({ countries }:{countries: CountryProps}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <Header /> */}
+      <Header />
       <div className='flex-input'>
         <input type="text" placeholder="search for a country" />
         <select name="filtercountry" id="">
