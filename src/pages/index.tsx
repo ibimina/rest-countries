@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,16 +7,35 @@ import styles from '@/styles/Home.module.css'
 import Header from "../components/Header"
 import { GetStaticProps } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
-type CountryProps= {
-    population: number
-    region: string
-    name: {common: string}
-    flags:{svg: string}
-    capital:string[]
-  }[]
 
-export default function Home({ countries }:{countries: CountryProps}) {
+type CountryProps = {
+  population: number
+  region: string
+  name: string
+  flags: { svg: string }
+  capital: string
+}[]
+
+export default function Home({ countries }: { countries: CountryProps }) {
+  const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value)
+    setCountriesData((data) => data.filter((country) => country.name.toLowerCase().includes(inputValue.toLowerCase())))
+  }
+  const [countriesData, setCountriesData] = useState(countries)
+  const [inputValue, setInputValue] = useState("")
+  
+  const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
+    setCountriesData((data) => data.filter((country) => country.region === e.target.value))
+    if (e.target.value === '') return setCountriesData(countries)
+
+  }
+  useEffect(()=>{
+    if (inputValue.length === 0) {
+      setCountriesData(countries)
+    }
+   
+  },[inputValue,countries])
   return (
     <>
       <Head>
@@ -25,9 +45,10 @@ export default function Home({ countries }:{countries: CountryProps}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+
       <div className='flex-input'>
-        <input type="text" placeholder="search for a country" />
-        <select name="filtercountry" id="">
+        <input type="text" value={inputValue} onChange={handleSearch} placeholder="search for a country" />
+        <select name="filtercountry" id="" onChange={handleFilter}>
           <option value="">Filter by Region</option>
           <option value="Africa">Africa</option>
           <option value="America">America</option>
@@ -36,24 +57,23 @@ export default function Home({ countries }:{countries: CountryProps}) {
           <option value="Oceania">Oceania</option>
         </select>
       </div>
-      
       <ul>
-        {countries.map((country) => (
-          <Link key={country.name.common} href={`/${encodeURIComponent(country.name.common)}`}>
-              <Image src={country.flags.svg} alt="flag" width={100} height={100} />
-              <p>{country.name.common}</p>
-              <p>{country.population}</p>
-              <p>{country.region}</p>
-              <p>{country.capital}</p>
-            </Link>
-          ))}
+        {countriesData.map((country) => (
+          <Link key={country.name} href={`/${encodeURIComponent(country.name)}`}>
+            <Image src={country.flags.svg} alt="flag" width={100} height={100} />
+            <p>{country.name}</p>
+            <p>{country.population}</p>
+            <p>{country.region}</p>
+            <p>{country.capital}</p>
+          </Link>
+        ))}
       </ul>
     </>
   )
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch('https://restcountries.com/v3.1/all')
-  const countries:CountryProps[] = await res.json()
+  const res = await fetch('https://restcountries.com/v2/all')
+  const countries: CountryProps[] = await res.json()
   return {
     props: {
       countries,
