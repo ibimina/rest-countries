@@ -19,21 +19,18 @@ type Props = {
     borders: string[]
     flag: string
 }
-const Details = ({ country }: { country: Props[] }) => {
+const Details :React.FC<{nation:Props[]}> = ({nation}) => {
     const route = useRouter()
     const goBack = () => {
         route.push("/")
     }
-    if(!route.isFallback && !country?.length || country === undefined){
-    return <ErrorPage statusCode={404} />
-    }
+    
     return (
         <>
             <Header />
             <div className="detContainer">
                 <button onClick={goBack} className='back'><span aria-label='back'></span> Back</button>
-                {country !== undefined &&
-                    country.map((country: Props) => (
+                { nation.map((country: Props) => (
                         <div key={country.nativeName} className='detaill'>
                             <div className='imgcon d-flag'>
                                 <Image src={country.flag} alt="flag" fill />
@@ -57,8 +54,8 @@ const Details = ({ country }: { country: Props[] }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className='bold'> <span className='para-btm blk'>Border Countries:</span>  <div className='border-con'>{country.borders.map((border) => <span className='light border' key={border}>{border}</span>)} </div> </div>
-                            </div>
+                            {country?.borders && <div className='bold'> <span className='para-btm blk'>Border Countries:</span>  <div className='border-con'>{country?.borders.map((border) => <span className='light border' key={border}>{border}</span>)} </div> </div>
+                 }           </div>
                         </div>))
                 }
                
@@ -86,7 +83,7 @@ export const getStaticProps = async (context: { params: { country: string } }) =
     const data = await res.json()
     return {
         props: {
-            country: data
+            nation: data
         }
     }
 }
