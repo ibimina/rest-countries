@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/image';
 import { GetStaticPaths } from 'next';
 import Header from "../components/Header";
 import { useRouter } from 'next/router';
@@ -21,7 +21,6 @@ type Props = {
 const Details = ({ country }: { country: Props[] }) => {
     const route = useRouter()
     const goBack = () => {
-
         route.push("/")
     }
     return (
@@ -49,18 +48,14 @@ const Details = ({ country }: { country: Props[] }) => {
                                     <p className='bold para-btm'>Currencies: {country.currencies.map((currency) => <span className='light' key={currency.name}>{currency.name}</span>)}</p>
                                     <p className='bold para-btm'>Languages: {country.languages.map((language) =>
                                         <span key={language.name} className='lang light'>{language.name}, </span>
-
                                     )}
                                     </p>
                                 </div>
                             </div>
                             <div className='bold'> <span className='para-btm blk'>Border Countries:</span>  <div className='border-con'>{country.borders.map((border) => <span className='light border' key={border}>{border}</span>)} </div> </div>
-
-                        </div>
-                        
+                        </div>    
                     </div>))}
-
-            </div>
+              </div>
         </>
     )
 }
