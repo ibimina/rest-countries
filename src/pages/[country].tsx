@@ -24,7 +24,7 @@ const Details = ({ country }: { country: Props[] }) => {
     const goBack = () => {
         route.push("/")
     }
-    if(!route.isFallback && !country?.length){
+    if(!route.isFallback && !country?.length || country === undefined){
     return <ErrorPage statusCode={404} />
     }
     return (
