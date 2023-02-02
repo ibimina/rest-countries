@@ -18,7 +18,7 @@ type Props = {
     borders: string[]
     flag: string
 }
-const Details = ({ country }: { country: Props[] | null }) => {
+const Details = ({ country }: { country: Props[] }) => {
     const route = useRouter()
     const goBack = () => {
         route.push("/")
@@ -28,7 +28,7 @@ const Details = ({ country }: { country: Props[] | null }) => {
             <Header />
             <div className="detContainer">
                 <button onClick={goBack} className='back'><span aria-label='back'></span> Back</button>
-                {country && country.map((country: Props) => (
+                {country.map((country: Props) => (
                     <div key={country.nativeName} className='detaill'>
                         <div className='imgcon d-flag'>
                             <Image src={country.flag} alt="flag" fill />
