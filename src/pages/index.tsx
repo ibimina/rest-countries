@@ -71,7 +71,7 @@ export default function Home({ countries }: { countries: CountryProps }) {
                 <p className={`${styles.countryname} country-name`}>{country.name}</p>
                 <p><span className='bold'>Polpulation</span>: <span className='light'>{country.population}</span> </p>
                 <p className='region'> <span className='bold'>Region</span> :<span className='light'>{country.region}</span></p>
-                <p> <span className='bold'>Capital</span>: <span className='light'>{country.capital}</span></p>
+                {country?.capital && <p className='bold '> Capital: <span className='light'>{country?.capital}</span></p>}
               </div>
             </Link>
           ))}
