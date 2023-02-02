@@ -24,7 +24,6 @@ const Details: React.FC<{ nation: Props[] }> = ({ nation }) => {
     const goBack = () => {
         route.push("/")
     }
-    console.log(nation)
     return (
         <>
             <Header />
