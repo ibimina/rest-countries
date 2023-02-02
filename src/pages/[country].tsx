@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ErrorPage from 'next/error';
 import { GetStaticPaths } from 'next';
 import Header from "../components/Header";
 import { useRouter } from 'next/router';
@@ -23,7 +24,9 @@ const Details = ({ country }: { country: Props[] }) => {
     const goBack = () => {
         route.push("/")
     }
-    
+    if(!route.isFallback && !country?.length){
+    return <ErrorPage statusCode={404} />
+    }
     return (
         <>
             <Header />
