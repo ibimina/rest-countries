@@ -32,7 +32,7 @@ const Details = ({ country }: { country: Props[] }) => {
             <Header />
             <div className="detContainer">
                 <button onClick={goBack} className='back'><span aria-label='back'></span> Back</button>
-                {route.isFallback ? <div>Loading...</div> : 
+                {country !== undefined &&
                     country.map((country: Props) => (
                         <div key={country.nativeName} className='detaill'>
                             <div className='imgcon d-flag'>
