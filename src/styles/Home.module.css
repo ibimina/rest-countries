@@ -22,13 +22,12 @@
   width: 100%;
   margin-bottom: 2em;
 }
-.select {
+.select,.select:focus {
   width: 60%;
   margin-bottom: 2em;
   border-right: 1em solid transparent;
   margin-bottom: 1em;
 }
-
 .container {
   width: 100%;
   margin: 0 auto;
