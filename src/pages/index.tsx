@@ -30,14 +30,21 @@ export default function Home({ countries }: { countries: CountryProps }) {
   const [inputValue, setInputValue] = useState("")
 
   const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    Array.from(document.querySelectorAll('.region')).forEach((p) => {
-      if (p.textContent === e.target.value) {
-        p.parentElement?.parentElement?.classList.remove('hidden')
-      } else {
-        p.parentElement?.parentElement?.classList.add('hidden')
+    if (e.target.value===""){
+      Array.from(document.querySelectorAll('.region-sp')).forEach((p) => {
+          p.parentElement?.parentElement?.parentElement?.classList.remove('hidden')
+      } )
+    }else{
+      Array.from(document.querySelectorAll('.region-sp')).forEach((p) => {
+        if (p.textContent === e.target.value) {
+          p.parentElement?.parentElement?.parentElement?.classList.remove('hidden')
+        } else {
+          p.parentElement?.parentElement?.parentElement?.classList.add('hidden')
+        }
       }
+      )
     }
-    )
+    
   }
 
   return (
@@ -55,7 +62,7 @@ export default function Home({ countries }: { countries: CountryProps }) {
           <select name="filtercountry" id="" onChange={handleFilter} className={styles.select}>
             <option value="">Filter by Region</option>
             <option value="Africa">Africa</option>
-            <option value="America">America</option>
+            <option value="Americas">America</option>
             <option value="Asia">Asia</option>
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
@@ -70,7 +77,7 @@ export default function Home({ countries }: { countries: CountryProps }) {
               <div className={styles.countrydet}>
                 <p className={`${styles.countryname} country-name`}>{country.name}</p>
                 <p><span className='bold'>Polpulation</span>: <span className='light'>{country.population}</span> </p>
-                <p className='region'> <span className='bold'>Region</span> :<span className='light'>{country.region}</span></p>
+                <p className='region'> <span className='bold '>Region</span> :<span className='light region-sp'>{country.region}</span></p>
                 {country?.capital && <p className='bold '> Capital: <span className='light'>{country?.capital}</span></p>}
               </div>
             </Link>
