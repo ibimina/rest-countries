@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import ErrorPage from 'next/error';
+import Head from 'next/head'
 import { GetStaticPaths } from 'next';
 import Header from "../components/Header";
 import { useRouter } from 'next/router';
@@ -26,6 +26,12 @@ const Details: React.FC<{ nation: Props[] }> = ({ nation }) => {
     }
     return (
         <>
+            <Head>
+                <title>Countries of the World</title>
+                <meta name="description" content="Details of a country" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header />
             <div className="detContainer">
                 <button onClick={goBack} className='back'><span aria-label='back'></span> Back</button>
