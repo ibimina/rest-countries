@@ -45,7 +45,7 @@ const Details: React.FC<{ nation: Props[] }> = ({ nation }) => {
                                 <div className='top-mar'>
                                     <p className='bold name'>{country.name}</p>
                                     <p className='bold para-btm'>Native Name: <span className='light'>{country.nativeName}</span></p>
-                                    <p className='bold para-btm'>Polpulation: <span className='light'>{country.population}</span> </p>
+                                    <p className='bold para-btm'>Polpulation: <span className='light'>{country.population.toLocaleString()}</span> </p>
                                     <p className='bold para-btm'> Region :<span className='light'>{country.region}</span></p>
                                     <p className='bold para-btm'> Sub Region: {country.subregion}</p>
                                     {country?.capital && <p className='bold para-btm'> Capital: <span className='light'>{country?.capital}</span></p>}

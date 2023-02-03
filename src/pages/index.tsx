@@ -76,7 +76,7 @@ export default function Home({ countries }: { countries: CountryProps }) {
               </div>
               <div className={styles.countrydet}>
                 <p className={`${styles.countryname} country-name`}>{country.name}</p>
-                <p><span className='bold'>Polpulation</span>: <span className='light'>{country.population}</span> </p>
+                <p><span className='bold'>Polpulation</span>: <span className='light'>{country.population.toLocaleString()}</span> </p>
                 <p className='region'> <span className='bold '>Region</span> :<span className='light region-sp'>{country.region}</span></p>
                 {country?.capital && <p className='bold '> Capital: <span className='light'>{country?.capital}</span></p>}
               </div>
